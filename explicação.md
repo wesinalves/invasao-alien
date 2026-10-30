@@ -12,7 +12,7 @@ Projeto da disciplina de Programação Orientada a Objetos — CEUB. O objetivo 
 - Miguel Costa Campos | 22603900
 ---
 
-## 🆕 Atividade: Tela de Game Over (Grupo — Lucas Puglise)
+## 🆕 Atividade: Tela de Game Over
 
 Foi adicionada uma tela de **Game Over** ao jogo, exibida automaticamente ao final de uma partida. Ela sobrepõe o cenário com uma camada escura semitransparente, apresenta o título "GAME OVER" em vermelho e dois botões lado a lado: **Restart** (reinicia a partida) e **Quit** (fecha o jogo).
 
