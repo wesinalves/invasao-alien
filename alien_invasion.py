@@ -23,8 +23,6 @@ def run_game():
     background_image = pygame.transform.scale(background_image, (ai_settings.screen_width, ai_settings.screen_height))
     background_rect = background_image.get_rect()
     background_rect.topleft = (0, 0)
-    joy = pygame.joystick.Joystick(0)
-    joy.init()
 
     # Make a play button
     play_button = Button(ai_settings, screen, "Play")

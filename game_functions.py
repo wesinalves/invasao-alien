@@ -22,16 +22,6 @@ def check_keydown_events(event, settings, screen, ship, bullets):
     elif event.key == pygame.K_q:
         sys.exit()        
 
-def check_keydown_events_joystick(event, settings, screen, ship, bullets):
-    """Respond to joystick button presses."""
-    if event.button == 0:  # Assuming button 0 is the fire button
-        fire_bullet(settings, screen, ship, bullets)
-    elif event.button == 1:  # Assuming button 1 is the quit button
-        sys.exit()
-    elif event.button == 14:  # Assuming button 2 is the right movement button
-        ship.moving_right = True
-    elif event.button == 13:  # Assuming button 3 is the left movement button
-        ship.moving_left = True
 
 def check_keyup_events(event, ship):
     """Respond to keyreleases."""
@@ -40,14 +30,6 @@ def check_keyup_events(event, ship):
         ship.moving_right = False
     elif event.key == pygame.K_LEFT:
         # Stop moving the ship to the right
-        ship.moving_left = False
-
-def check_keyup_events_joystick(event, ship):
-    """Respond to joystick button releases."""
-
-    if event.button == 14:  # Assuming button 14 is the right movement button
-        ship.moving_right = False
-    elif event.button == 13:  # Assuming button 13 is the left movement button
         ship.moving_left = False
 
     
@@ -145,7 +127,7 @@ def check_bullets_aliens_collisions(settings, screen, stats, sb, ship, bullets, 
         # Destroy existing bullets and create new fleet.
         # If the entire fleet is destroyed, start a new level.
         bullets.empty()
-        settings.inscrease_speed()
+        settings.increase_speed()
 
         # Increase level.
         stats.level += 1
