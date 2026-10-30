@@ -9,7 +9,7 @@ Projeto da disciplina de Programação Orientada a Objetos — CEUB. O objetivo 
 - Arthur de Miranda | 22612297
 - Miguel Soares Flores | 22601847
 - Tiago Cordeiro | 22604732
-
+- Miguel Costa Campos | 22603900
 ---
 
 ## 🆕 Atividade: Tela de Game Over (Grupo — Lucas Puglise)
