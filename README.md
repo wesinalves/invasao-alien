@@ -25,7 +25,7 @@ Saiba mais sobre como fazer *fork* ([forking](https://help.github.com/en/github/
 ```bash
 git remote add upstream https://github.com/wesinalves/invasao-alien.git
 git fetch upstream
-git pull upstream master
+git pull upstream main
 git push
 ```
 
