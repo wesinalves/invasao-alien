@@ -19,7 +19,7 @@ def run_game():
     ai_settings = Settings()
     screen = pygame.display.set_mode((ai_settings.screen_width, ai_settings.screen_height))
     pygame.display.set_caption("Alien Invasion")
-    background_image = pygame.image.load('images/space.png')
+    background_image = pygame.image.load('invasao-alien\images\space.png')
     background_image = pygame.transform.scale(background_image, (ai_settings.screen_width, ai_settings.screen_height))
     background_rect = background_image.get_rect()
     background_rect.topleft = (0, 0)

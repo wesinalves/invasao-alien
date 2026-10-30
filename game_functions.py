@@ -6,7 +6,7 @@ from time import sleep
 import pygame
 from bullet import Bullet
 from alien import Alien
-
+from som import SHOT_SOUND, tocar_som, DAMAGE_SOUND
 
 def check_keydown_events(event, settings, screen, ship, bullets):
     """Respond to keypresses."""
@@ -138,6 +138,7 @@ def check_bullets_aliens_collisions(settings, screen, stats, sb, ship, bullets, 
             stats.score += settings.alien_points * len(aliens)
             sb.prep_score()
         check_high_score(stats, sb)
+        tocar_som(DAMAGE_SOUND)
 
 
 def fire_bullet(settings, screen, ship, bullets):
@@ -145,6 +146,7 @@ def fire_bullet(settings, screen, ship, bullets):
     if len(bullets) < settings.bullets_allowed:
         new_bullet = Bullet(settings, screen, ship)
         bullets.add(new_bullet)
+        tocar_som(SHOT_SOUND)
 
 def get_number_aliens_x(settings, alien_width):
     """Determine the number of aliens that fit in a row."""
