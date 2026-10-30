@@ -6,7 +6,7 @@ Projeto da disciplina de programação orientada a objetos. O objetivo é implem
 
 - Dê uma **estrela** (*Star*) neste repositório.
 - Verifique os scripts existentes no diretório `projetos`.
-- Na página do repositório [POO](https://github.com/wesinalves/invasao-alien), clique no botão **Fork**. 
+- Na página do repositório [Invasão Alien](https://github.com/wesinalves/invasao-alien), clique no botão **Fork**. 
 <br><img src="https://docs.github.com/assets/images/help/repository/fork-button.png" title="Imagem do botão Fork" width="400"/>
 - **Clone** o repositório que você acabou de fazer o *fork* para sua máquina local. Este botão mostrará a URL que você deve usar. 
 <br><img src="https://docs.github.com/assets/images/help/repository/code-button.png" title="Botão Code" width="400"/>
