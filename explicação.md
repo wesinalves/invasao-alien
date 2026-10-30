@@ -1,4 +1,5 @@
 # Invasão Alien
+Projeto da disciplina de Programação Orientada a Objetos — CEUB. O objetivo é implementar o jogo Invasão Alien usando Pygame.
 
 ---
 
@@ -8,7 +9,6 @@
 - Arthur de Miranda | 22612297
 - Miguel Soares Flores | 22601847
 - Tiago Cordeiro | 22604732
-Projeto da disciplina de Programação Orientada a Objetos — CEUB. O objetivo é implementar o jogo Invasão Alien usando Pygame.
 
 ---
 
