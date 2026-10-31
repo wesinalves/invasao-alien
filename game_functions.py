@@ -50,7 +50,8 @@ def check_play_button(settings, screen, stats, sb, play_button, ship, aliens, bu
         # Reset the game statistics
         stats.reset_stats()
         stats.game_active = True
-        
+        stats.game_over = False
+
         # Reset the scoreboard images.
         sb.prep_score()
         sb.prep_high_score()
@@ -65,7 +66,15 @@ def check_play_button(settings, screen, stats, sb, play_button, ship, aliens, bu
         create_fleet(settings, screen, ship, aliens)
         ship.center_ship()
 
-def check_events(settings, screen, stats, sb, play_button, ship, aliens, bullets):
+def check_game_over_buttons(settings, screen, stats, sb, play_button, game_over_screen, ship, aliens, bullets, mouse_x, mouse_y):
+    """Restart or quit the game when the player clicks a Game Over button."""
+    if game_over_screen.restart_button.rect.collidepoint(mouse_x, mouse_y):
+        # Reuse the Play button logic to start a new game.
+        check_play_button(settings, screen, stats, sb, play_button, ship, aliens, bullets, play_button.rect.centerx, play_button.rect.centery)
+    elif game_over_screen.quit_button.rect.collidepoint(mouse_x, mouse_y):
+        sys.exit()
+
+def check_events(settings, screen, stats, sb, play_button, ship, aliens, bullets, game_over_screen):
     """Respond to keypresses and mouse events."""
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -80,11 +89,14 @@ def check_events(settings, screen, stats, sb, play_button, ship, aliens, bullets
             check_keydown_events_joystick(event, settings, screen, ship, bullets)
         elif event.type == pygame.JOYBUTTONUP:
             check_keyup_events_joystick(event, ship)
+        elif event.type == pygame.MOUSEBUTTONDOWN and stats.game_over:
+            mouse_x, mouse_y = pygame.mouse.get_pos()
+            check_game_over_buttons(settings, screen, stats, sb, play_button, game_over_screen, ship, aliens, bullets, mouse_x, mouse_y)
         elif event.type == pygame.MOUSEBUTTONDOWN:
             mouse_x, mouse_y = pygame.mouse.get_pos()
             check_play_button(settings, screen, stats, sb, play_button, ship, aliens, bullets, mouse_x, mouse_y, event)
 
-def update_screen(settings, stats, screen, sb, ship, aliens, bullets, play_button, background_image, background_rect):
+def update_screen(settings, stats, screen, sb, ship, aliens, bullets, play_button, background_image, background_rect, game_over_screen):
     """Update images on the screen and flip to the new screen."""
     # Redraw the screen during each pass through the loop.
     #screen.fill(settings.bg_color)
@@ -100,8 +112,11 @@ def update_screen(settings, stats, screen, sb, ship, aliens, bullets, play_butto
     # Draw the score information
     sb.show_score()
 
+    # Draw the Game Over screen if the player lost all ships
+    if stats.game_over:
+        game_over_screen.draw()
     # Draw the play button if the game is inactive
-    if not stats.game_active:
+    elif not stats.game_active:
         play_button.draw_button()
     # Make the most recently drawn screen visible.
     pygame.display.flip()
@@ -216,6 +231,7 @@ def ship_hit(settings, stats, screen, sb, ship, aliens, bullets):
         sleep(0.5)
     else:
         stats.game_active = False
+        stats.game_over = True
         pygame.mouse.set_visible(True)
 
 def check_aliens_bottom(settings, stats, screen, sb, ship, aliens, bullets):
