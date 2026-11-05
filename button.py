@@ -1,37 +1,24 @@
-# Python Journey - Chapter 32
-# Class for start button
+import pygame
 
-import pygame.font
 
-class Button():
+class Button:
+    """Botao com destaque para mouse, teclado e controle."""
 
-    def __init__(self, settings, screen, msg):
-        '''Initialize button attributes'''
+    def __init__(self, settings, screen, msg, y, width=300):
         self.screen = screen
-        self.screen_rect = screen.get_rect()
+        self.rect = pygame.Rect(0, 0, width, 54)
+        self.rect.center = (screen.get_rect().centerx, y)
+        self.msg = msg
+        self.font = pygame.font.SysFont('arial', 27, bold=True)
 
-        # Set the dimensions and properties of the button.
-        self.width, self.height = 200, 50
-        self.button_color = (0, 255, 0)
-        self.text_color = (255, 255, 255)
-        self.font = pygame.font.SysFont(None, 48)
-
-        # Build the button's rect object and center it.
-        self.rect = pygame.Rect(0, 0, self.width, self.height)
-        self.rect.center = self.screen_rect.center
-
-        # The button message needs to be prepped only once.
-        self.prep_msg(msg)
-    
-    def prep_msg(self, msg):
-        """Turn msg into a rendered image and center text on the button."""
-        self.msg_image = self.font.render(msg, True, self.text_color, self.button_color)
-        self.msg_image_rect = self.msg_image.get_rect()
-        self.msg_image_rect.center = self.rect.center
-    
-    def draw_button(self):
-        """Draw blank button and then draw message."""
-        self.screen.fill(self.button_color, self.rect)
-        self.screen.blit(self.msg_image, self.msg_image_rect)
-
-
+    def draw_button(self, selected=False):
+        color = (25, 112, 78) if selected else (15, 38, 65)
+        border = (110, 255, 177) if selected else (63, 111, 153)
+        shadow = self.rect.move(0, 4)
+        pygame.draw.rect(self.screen, (3, 12, 27), shadow, border_radius=12)
+        pygame.draw.rect(self.screen, color, self.rect, border_radius=12)
+        pygame.draw.rect(self.screen, border, self.rect, 2, border_radius=12)
+        if selected:
+            pygame.draw.rect(self.screen, (173, 255, 205), self.rect.inflate(8, 8), 1, border_radius=15)
+        label = self.font.render(self.msg, True, (255, 255, 255))
+        self.screen.blit(label, label.get_rect(center=self.rect.center))
