@@ -35,6 +35,7 @@ def check_keyup_events(event, ship):
     
 def check_play_button(settings, screen, stats, sb, play_button, ship, aliens, bullets, mouse_x=None, mouse_y=None, event=None):
     """Start a new game when the player clicks Play."""
+    button_clicked = False
     if mouse_x is not None and mouse_y is not None:
         button_clicked = play_button.rect.collidepoint(mouse_x, mouse_y)
     elif event and event.button == 6:  # Assuming button start is the fire button
@@ -43,6 +44,7 @@ def check_play_button(settings, screen, stats, sb, play_button, ship, aliens, bu
     if button_clicked and not stats.game_active:
         # Reset the game settings.
         settings.initialize_dynamic_settings()
+        settings.alien_points = 50
 
         # Hide the mouse cursor.
         pygame.mouse.set_visible(False)
@@ -66,7 +68,7 @@ def check_play_button(settings, screen, stats, sb, play_button, ship, aliens, bu
         ship.center_ship()
 
 def check_events(settings, screen, stats, sb, play_button, ship, aliens, bullets):
-    """Respond to keypresses and mouse events."""
+    """Compatibilidade com o projeto original (menu usa eventos no arquivo principal)."""
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
@@ -74,15 +76,11 @@ def check_events(settings, screen, stats, sb, play_button, ship, aliens, bullets
             check_keydown_events(event, settings, screen, ship, bullets)
         elif event.type == pygame.KEYUP:
             check_keyup_events(event, ship)
-        elif event.type == pygame.JOYBUTTONDOWN:
-            if event.button == 6:  # Assuming button start is the fire button
-                check_play_button(settings, screen, stats, sb, play_button, ship, aliens, bullets, None, None, event)
-            check_keydown_events_joystick(event, settings, screen, ship, bullets)
-        elif event.type == pygame.JOYBUTTONUP:
-            check_keyup_events_joystick(event, ship)
-        elif event.type == pygame.MOUSEBUTTONDOWN:
-            mouse_x, mouse_y = pygame.mouse.get_pos()
-            check_play_button(settings, screen, stats, sb, play_button, ship, aliens, bullets, mouse_x, mouse_y, event)
+        elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            x, y = event.pos
+            check_play_button(settings, screen, stats, sb, play_button,
+                              ship, aliens, bullets, x, y)
+
 
 def update_screen(settings, stats, screen, sb, ship, aliens, bullets, play_button, background_image, background_rect):
     """Update images on the screen and flip to the new screen."""
