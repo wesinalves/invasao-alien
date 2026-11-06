@@ -10,6 +10,7 @@ import game_functions as gf
 from game_stats import GameStats
 from button import Button
 from scoreboard import Scoreboard
+from game_over import GameOver
 clock = pygame.time.Clock()
 
 def run_game():
@@ -26,6 +27,9 @@ def run_game():
 
     # Make a play button
     play_button = Button(ai_settings, screen, "Play")
+
+    # Make the Game Over screen (Restart and Quit buttons)
+    game_over_screen = GameOver(ai_settings, screen)
 
     # Create an instance to store game statistics and create a scoreboard.
     stats = GameStats(ai_settings)
@@ -47,13 +51,13 @@ def run_game():
     while True:
 
         # Watch for keyboard and mouse events.
-        gf.check_events(ai_settings, screen, stats, sb, play_button, ship, aliens, bullets)
+        gf.check_events(ai_settings, screen, stats, sb, play_button, ship, aliens, bullets, game_over_screen)
 
         if stats.game_active:
             ship.update()
             gf.update_bullets(ai_settings, screen, stats, sb, ship, aliens, bullets)
             gf.update_aliens(ai_settings, stats, screen, sb, ship, aliens, bullets)       
         
-        gf.update_screen(ai_settings, stats, screen, sb, ship, aliens, bullets, play_button, background_image, background_rect)
+        gf.update_screen(ai_settings, stats, screen, sb, ship, aliens, bullets, play_button, background_image, background_rect, game_over_screen)
         clock.tick(60)
 run_game()

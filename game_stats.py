@@ -12,6 +12,9 @@ class GameStats():
         # Start Alien Invasion in an active state.
         self.game_active = False
 
+        # True only after the player loses all ships.
+        self.game_over = False
+
         # High score should never be reset.
         self.high_score = 0
     
