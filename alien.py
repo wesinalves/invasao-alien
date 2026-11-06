@@ -14,7 +14,7 @@ class Alien(Sprite):
         self.ai_settings = settings
 
         # Load the alien image and set its rect attribute.
-        self.image = pygame.image.load('images/alien_no_background.png')
+        self.image = pygame.image.load('invasao-alien/images/alien_no_background.png')
         self.rect = self.image.get_rect()
 
         # resize the alien image to fit the screen

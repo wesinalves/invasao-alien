@@ -14,7 +14,7 @@ class Ship(Sprite):
         self.ai_settings = settings
 
         # Load the ship image and get its rect.
-        self.image = pygame.image.load('images/ship_no_background.png')
+        self.image = pygame.image.load('invasao-alien\images\ship_no_background.png')
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
         # resize the ship image to fit the screen
