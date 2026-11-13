@@ -8,6 +8,7 @@ from bullet import Bullet
 from alien import Alien
 
 
+#Maria Clara, Olívia, Nestor e Davi Medeiros
 def check_keydown_events(event, settings, screen, ship, bullets):
     """Respond to keypresses."""
     if event.key == pygame.K_RIGHT:
@@ -20,8 +21,12 @@ def check_keydown_events(event, settings, screen, ship, bullets):
         # Create a new bullet and add it to the bullets group.
         fire_bullet(settings, screen, ship, bullets)
     elif event.key == pygame.K_q:
-        sys.exit()        
-
+        sys.exit() 
+    if event.key == pygame.K_ESCAPE:
+        # Só permite pausar se o jogo estiver rodando
+        if stats.game_active:
+            stats.paused = not stats.paused
+            pygame.mouse.set_visible(stats.paused)     
 
 def check_keyup_events(event, ship):
     """Respond to keyreleases."""
